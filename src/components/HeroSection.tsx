@@ -18,7 +18,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-primary font-bold mb-4 text-xs md:text-sm uppercase tracking-[0.3em]"
           >
-            AI & Data Engineer
+            AI & Data Science Engineer
           </motion.p>
 
           <motion.h1
@@ -73,6 +73,7 @@ const HeroSection = () => {
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                 whileHover={{ y: -5 }}
+                aria-label={`Visit my ${social.label}`}
               >
                 <div className="p-3 rounded-full bg-secondary group-hover:bg-primary/10 border border-border group-hover:border-primary/30 transition-all">
                   <social.icon size={22} />

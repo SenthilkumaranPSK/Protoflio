@@ -34,7 +34,11 @@ const AboutSection = () => {
               className="md:col-span-2"
             >
               <div className="relative">
-                <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-border card-glow">
+                <div
+                  className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-border card-glow"
+                  aria-label="Profile image of Senthilkumaran P"
+                  role="img"
+                >
                   <User size={60} className="text-primary/50 sm:hidden" />
                   <User size={80} className="text-primary/50 hidden sm:block" />
                 </div>
