@@ -22,14 +22,12 @@ const HeroSection = () => {
           </motion.p>
 
           <motion.h1
-  animate={{ opacity: 1, y: 0 }}
-  className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black mb-8 tracking-tighter"
->
-  Senthil<span className="text-gradient">kumaran</span>{" "}
-  <span className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold">
-    P
-  </span>
-</motion.h1>
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black mb-8 tracking-tighter text-center w-full"
+          >
+            Senthil<span className="text-gradient">kumaran</span>&nbsp;P
+          </motion.h1>
+
 
 
           <motion.p
