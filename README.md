@@ -1,73 +1,57 @@
-# Welcome to your Lovable project
+# 🤖 Senthilkumaran P | AI & Data Engineer
 
-## Project info
+![Premium Portfolio](https://img.shields.io/badge/Portfolio-Premium-blueviolet?style=for-the-badge&logo=react)
+![Tech Stack](https://img.shields.io/badge/Stack-AI_%7C_Data_%7C_ML-blue?style=for-the-badge&logo=python)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Welcome to my professional portfolio. I am an **AI & Data Engineer** focused on architecting intelligent systems through data-driven innovation and cutting-edge deep learning models.
 
-## How can I edit this code?
+## 🚀 Key Features
 
-There are several ways of editing your application.
+- **Bespoke Glassmorphism Design**: A premium, high-end visual aesthetic with smooth gradients and blurred backgrounds.
+- **Zero-Refresh Persistence**: Optimized global layout that ensures the navigation bar and background remain rock-solid during route transitions.
+- **"Command Center" Navigation**: A centered, floating navigation pill that stays accessible at all times.
+- **AI-Powered Portfolio**: Showcasing projects in Computer Vision, Financial AI, and Predictive Modeling.
+- **Fully Responsive**: Seamless experience across mobile, tablet, and desktop devices.
 
-**Use Lovable**
+## 🛠️ Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **Frontend**: React.js, TypeScript, Tailwind CSS, Framer Motion
+- **UI Components**: Shadcn UI, Lucide Icons
+- **Deployment**: Vite, specialized for lightning-fast performance
+- **Core Engineering**: Python, Machine Learning (ML), Deep Learning (DL), Computer Vision
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🗺️ Project Structure
 
-**Use your preferred IDE**
+```text
+├── src/
+│   ├── components/      # Modular UI components (Navigation, Hero, Sections)
+│   ├── pages/           # High-level page components (Index, Resume)
+│   ├── ui/              # Atomized Shadcn UI building blocks
+│   └── App.tsx          # Main routing & application shell
+├── public/              # Static assets (Resume, PDF)
+└── index.html           # Entry point
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## ⚡ Quick Start
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone the repository
+git clone https://github.com/SenthilkumaranPSK/senthil-protoflio.git
 
-Follow these steps:
+# Install dependencies
+npm install
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 📬 Connect with Me
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- 💼 **LinkedIn**: [senthilkumaran75](https://linkedin.com/in/senthilkumaran75)
+- 🐙 **GitHub**: [SenthilkumaranPSK](https://github.com/SenthilkumaranPSK)
+- 📸 **Instagram**: [@senthil_75_](https://www.instagram.com/senthil_75_)
+- 📧 **Email**: senthil2005kumaran@gmail.com
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+*Built with passion, React, and Antigravity AI.*
