@@ -23,10 +23,9 @@ const HeroSection = () => {
 
           <motion.h1
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black mb-8 tracking-tighter text-center flex flex-col items-center justify-center w-full"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black mb-8 tracking-tighter text-center"
           >
-            <span className="block">Senthil<span className="text-gradient">kumaran</span></span>
-            <span className="block mt-2 sm:mt-0 font-black">P</span>
+            Senthil<span className="text-gradient">kumaran</span>&nbsp;P
           </motion.h1>
 
 
