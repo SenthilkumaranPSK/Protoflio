@@ -5,6 +5,7 @@ import { Mail, Linkedin, Send, MapPin, Phone, Github } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+import { Label } from './ui/label';
 import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
@@ -16,14 +17,42 @@ const ContactSection = () => {
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: 'Message sent!',
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-    setFormData({ name: '', email: '', message: '' });
+
+    const gotcha = (e.currentTarget.elements.namedItem('_gotcha') as HTMLInputElement).value;
+    if (gotcha) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xwvgvenl', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `New portfolio message from ${formData.name}`,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Form submission failed');
+
+      toast({
+        title: 'Message sent!',
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      setFormData({ name: '', email: '', message: '' });
+    } catch {
+      toast({
+        title: 'Something went wrong',
+        description: 'Please try again or email me directly at senthil2005kumaran@gmail.com.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -141,8 +170,12 @@ const ContactSection = () => {
             <h3 className="text-lg md:text-xl font-semibold mb-4 md:mb-6">Send a Message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+              <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
               <div>
+                <Label htmlFor="contact-name" className="sr-only">Your Name</Label>
                 <Input
+                  id="contact-name"
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -151,7 +184,9 @@ const ContactSection = () => {
                 />
               </div>
               <div>
+                <Label htmlFor="contact-email" className="sr-only">Your Email</Label>
                 <Input
+                  id="contact-email"
                   type="email"
                   placeholder="Your Email"
                   value={formData.email}
@@ -161,7 +196,9 @@ const ContactSection = () => {
                 />
               </div>
               <div>
+                <Label htmlFor="contact-message" className="sr-only">Your Message</Label>
                 <Textarea
+                  id="contact-message"
                   placeholder="Your Message"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -171,10 +208,11 @@ const ContactSection = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 disabled:opacity-60"
               >
                 <Send size={18} />
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           </motion.div>
