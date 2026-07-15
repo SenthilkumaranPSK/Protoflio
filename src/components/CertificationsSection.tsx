@@ -1,32 +1,50 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Award, Trophy, Medal, Star } from 'lucide-react';
+import { Award, Trophy, Medal, Star, FileCheck2 } from 'lucide-react';
 
 const certifications = [
   {
     icon: Star,
     title: 'Google Agentic AI Day 2025 Hackathon',
-    issuer: 'Shortlisted Participant',
+    issuer: 'Google — Shortlisted on National Level',
+    type: 'achievement',
+  },
+  {
+    icon: Trophy,
+    title: '2nd Place — Forest Fire Prevention Hackathon',
+    issuer: 'Salem District-Level Competition',
+    type: 'achievement',
+  },
+  {
+    icon: Medal,
+    title: 'Agentic Website Track',
+    issuer: 'Bengaluru AI Hack Day — Participated',
     type: 'achievement',
   },
   {
     icon: Award,
+    title: 'National Hackathon on Human-Wildlife Coexistence',
+    issuer: 'Ministry of Environment, Govt. of India & Wildlife Institute of India, Dehradun — Participated',
+    type: 'achievement',
+  },
+  {
+    icon: FileCheck2,
     title: 'Machine Learning Specialization',
     issuer: 'LIVEWIRE',
     type: 'certification',
   },
   {
-    icon: Medal,
-    title: 'Data Science Foundation',
-    issuer: 'Great Learning',
+    icon: FileCheck2,
+    title: 'Master in Data Analysis and Analytics',
+    issuer: 'Udemy',
     type: 'certification',
   },
   {
-    icon: Trophy,
-    title: '2nd Place - Forest Fire Prevention Hackathon',
-    issuer: 'District Level Competition, Salem',
-    type: 'achievement',
+    icon: FileCheck2,
+    title: 'GenAI Content Summarizer using Amazon Bedrock',
+    issuer: 'AI for Bharat — AWS × Hack2Skill',
+    type: 'certification',
   },
 ];
 
@@ -64,7 +82,7 @@ const CertificationsSection = () => {
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
           </div>
           <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
-            Recognition and continuous learning in the field of data science
+            Recognition, awards, and continuous learning in data science &amp; AI
           </p>
         </motion.div>
 
@@ -81,17 +99,17 @@ const CertificationsSection = () => {
               className="flex items-start sm:items-center gap-3 md:gap-4 bg-card border border-border rounded-xl p-4 md:p-5 card-glow"
             >
               <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                cert.type === 'achievement' 
-                  ? 'bg-gradient-to-br from-yellow-500/20 to-orange-500/20' 
+                cert.type === 'achievement'
+                  ? 'bg-gradient-to-br from-yellow-500/20 to-orange-500/20'
                   : 'bg-primary/10'
               }`}>
-                <cert.icon 
-                  size={18} 
-                  className={`md:hidden ${cert.type === 'achievement' ? 'text-yellow-500' : 'text-primary'}`} 
+                <cert.icon
+                  size={18}
+                  className={`md:hidden ${cert.type === 'achievement' ? 'text-yellow-500' : 'text-primary'}`}
                 />
-                <cert.icon 
-                  size={24} 
-                  className={`hidden md:block ${cert.type === 'achievement' ? 'text-yellow-500' : 'text-primary'}`} 
+                <cert.icon
+                  size={24}
+                  className={`hidden md:block ${cert.type === 'achievement' ? 'text-yellow-500' : 'text-primary'}`}
                 />
               </div>
               <div className="flex-1 min-w-0">
@@ -99,8 +117,8 @@ const CertificationsSection = () => {
                 <p className="text-xs md:text-sm text-muted-foreground">{cert.issuer}</p>
               </div>
               <div className={`px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-medium whitespace-nowrap flex-shrink-0 ${
-                cert.type === 'achievement' 
-                  ? 'bg-yellow-500/10 text-yellow-500' 
+                cert.type === 'achievement'
+                  ? 'bg-yellow-500/10 text-yellow-500'
                   : 'bg-primary/10 text-primary'
               }`}>
                 {cert.type === 'achievement' ? 'Achievement' : 'Certified'}

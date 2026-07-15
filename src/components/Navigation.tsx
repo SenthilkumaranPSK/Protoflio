@@ -1,17 +1,11 @@
-import { useState } from 'react';
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button } from './ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from './ui/dialog';
+import { useEffect, useState } from 'react';
+import { motion, useScroll, useMotionValueEvent, useSpring, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
-const navItems = [
+type NavItem = { name: string; href: string };
+
+const navItems: NavItem[] = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
@@ -20,10 +14,17 @@ const navItems = [
   { name: 'Contact', href: '#contact' },
 ];
 
+const sectionIds = navItems
+  .map((item) => item.href)
+  .filter((href) => href.startsWith('#'))
+  .map((href) => href.slice(1));
+
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
+  const [activeSection, setActiveSection] = useState('');
+  const { scrollY, scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -31,18 +32,41 @@ const Navigation = () => {
     setIsScrolled(latest > 50);
   });
 
-  const NavLinkContent = ({ item, index, isMobile = false }: { item: any, index: number, isMobile?: boolean }) => (
-    <motion.span
-      animate={{ opacity: 1, y: 0 }}
-      className={isMobile
-        ? "block py-4 text-muted-foreground hover:text-foreground transition-all duration-300 font-bold text-xl uppercase tracking-widest text-center"
-        : "nav-link text-[10px] lg:text-[11px] font-black tracking-[0.2em] cursor-pointer uppercase"}
-    >
-      {item.name}
-    </motion.span>
-  );
+  useEffect(() => {
+    if (!isHomePage) return;
 
-  const NavLink = ({ item, index, isMobile = false }: { item: any, index: number, isMobile?: boolean }) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [isHomePage]);
+
+  const NavLinkContent = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean }) => {
+    const isActive = item.href === `#${activeSection}` || (item.href === '/' && isHomePage && !activeSection);
+    return (
+      <motion.span
+        animate={{ opacity: 1, y: 0 }}
+        className={isMobile
+          ? `block py-4 transition-all duration-300 font-bold text-xl uppercase tracking-widest text-center ${isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`
+          : `nav-link text-[10px] lg:text-[11px] font-black tracking-[0.2em] cursor-pointer uppercase ${isActive ? 'active text-primary' : ''}`}
+      >
+        {item.name}
+      </motion.span>
+    );
+  };
+
+  const NavLink = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean }) => {
     const isInternalAnchor = item.href.startsWith('#');
 
     const handleClick = (e: React.MouseEvent) => {
@@ -54,6 +78,9 @@ const Navigation = () => {
           const el = document.querySelector(item.href);
           el?.scrollIntoView({ behavior: 'smooth' });
         }
+      } else if (item.href === '/' && isHomePage) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
 
@@ -63,7 +90,7 @@ const Navigation = () => {
         className="group"
         onClick={handleClick}
       >
-        <NavLinkContent item={item} index={index} isMobile={isMobile} />
+        <NavLinkContent item={item} isMobile={isMobile} />
       </Link>
     );
   };
@@ -73,6 +100,10 @@ const Navigation = () => {
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none"
     >
+      <motion.div
+        style={{ scaleX: progress }}
+        className="fixed top-0 left-0 right-0 h-[2px] bg-primary origin-left z-50 pointer-events-none"
+      />
       <motion.div
         animate={{
           backgroundColor: isScrolled ? "hsl(var(--background) / 0.82)" : "hsl(var(--background) / 0.4)",
@@ -88,8 +119,8 @@ const Navigation = () => {
         <div className="flex items-center gap-6 md:gap-10 lg:gap-14">
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 lg:gap-10">
-            {navItems.map((item, index) => (
-              <NavLink key={item.name} item={item} index={index} />
+            {navItems.map((item) => (
+              <NavLink key={item.name} item={item} />
             ))}
           </div>
 
@@ -116,8 +147,8 @@ const Navigation = () => {
             className="fixed inset-0 bg-background/60 z-[-1] flex flex-col items-center justify-center p-8 md:hidden pointer-events-auto"
           >
             <div className="flex flex-col gap-6 items-center w-full">
-              {navItems.map((item, index) => (
-                <NavLink key={item.name} item={item} index={index} isMobile />
+              {navItems.map((item) => (
+                <NavLink key={item.name} item={item} isMobile />
               ))}
             </div>
           </motion.div>

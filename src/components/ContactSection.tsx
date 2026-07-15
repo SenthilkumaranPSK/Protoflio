@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Mail, Linkedin, Send, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Send, MapPin, Phone, Github } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -56,6 +56,21 @@ const ContactSection = () => {
             
             <div className="space-y-3 md:space-y-4">
               <motion.a
+                href="tel:+919443726090"
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
+                whileHover={{ x: 5 }}
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Phone size={18} className="text-primary md:hidden" />
+                  <Phone size={20} className="text-primary hidden md:block" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs md:text-sm text-muted-foreground">Phone</p>
+                  <p className="font-medium text-sm md:text-base">+91 94437 26090</p>
+                </div>
+              </motion.a>
+
+              <motion.a
                 href="mailto:senthil2005kumaran@gmail.com"
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
                 whileHover={{ x: 5 }}
@@ -87,14 +102,31 @@ const ContactSection = () => {
                 </div>
               </motion.a>
 
+              <motion.a
+                href="https://github.com/SenthilkumaranPSK"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
+                whileHover={{ x: 5 }}
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Github size={18} className="text-primary md:hidden" />
+                  <Github size={20} className="text-primary hidden md:block" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs md:text-sm text-muted-foreground">GitHub</p>
+                  <p className="font-medium text-sm md:text-base truncate">github.com/SenthilkumaranPSK</p>
+                </div>
+              </motion.a>
+
               <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <MapPin size={18} className="text-primary md:hidden" />
                   <MapPin size={20} className="text-primary hidden md:block" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs md:text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium text-sm md:text-base">Salem, India</p>
+                  <p className="font-medium text-sm md:text-base">Salem, Tamil Nadu</p>
                 </div>
               </div>
             </div>

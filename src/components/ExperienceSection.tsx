@@ -1,24 +1,44 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, GraduationCap, Award } from 'lucide-react';
 
 const experiences = [
+  {
+    role: 'AI Developer Intern',
+    company: 'Python and Ladder (Uraikathai)',
+    location: 'Remote',
+    topic: 'AI-Powered Interactive Storytelling Pipeline',
+    description: 'Engineered an AI-powered interactive storytelling pipeline integrating SDXL, img2img, and ControlNet to generate context-aware, visually consistent narrative assets, with iterative prompt orchestration and human-in-the-loop evaluation.',
+    period: 'Jan 2026 – Present',
+  },
+  {
+    role: 'AI & ML Intern',
+    company: 'Apex Seekers Edtech Private Limited',
+    location: 'Remote',
+    topic: 'End-to-End Machine Learning Pipelines',
+    description: 'Designed and implemented end-to-end ML pipelines using Python, Pandas, and Scikit-learn, covering data preprocessing, feature engineering, hyperparameter optimization, and comparative model evaluation for educational solutions.',
+    period: 'Jul 2025 – Aug 2025',
+  },
   {
     role: 'Data Scientist Intern',
     company: 'Stack Queue',
     location: 'Salem',
     topic: 'European Ski Resort Data Analysis',
-    description: 'Analyzed trends and patterns in European tourism data to provide actionable insights for optimizing ski resort operations and visitor experiences.',
-    period: '2024',
+    description: 'Performed exploratory data analysis and time-series modeling on European ski-resort tourism datasets, developing executive-level dashboards with Matplotlib and Seaborn to support strategic resource planning.',
+    period: 'Aug 2024 – Sep 2024',
   },
+];
+
+const education = [
   {
-    role: 'Data Analytics Using Python',
-    company: 'Mikrosun Technology',
-    location: 'Salem',
-    topic: 'COVID-19 Data Analysis Using EDA',
-    description: 'Conducted EDA on state-wise COVID-19 data using Python, leveraging Pandas, Matplotlib, and Seaborn for insights on case trends and recovery rates.',
-    period: '2023',
+    icon: GraduationCap,
+    title: 'B.Tech — Artificial Intelligence & Data Science',
+    institution: 'Dhirajlal Gandhi College of Technology',
+    location: 'Salem, Tamil Nadu',
+    period: 'up to Sem 7',
+    score: 'CGPA: 7.4 / 10',
+    note: 'Strong foundation in computer science with a specialization in Artificial Intelligence and Data Science.',
   },
 ];
 
@@ -41,7 +61,7 @@ const ExperienceSection = () => {
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
           </div>
           <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
-            Professional experience and internships in data science
+            Professional experience and internships in AI & data science
           </p>
         </motion.div>
 
@@ -91,6 +111,59 @@ const ExperienceSection = () => {
 
                     <p className="text-muted-foreground text-xs md:text-sm">
                       {exp.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Education */}
+        <div className="max-w-3xl mx-auto mt-16 md:mt-20">
+          <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 justify-center">
+            <div className="w-6 md:w-12 h-[1px] bg-primary" />
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center">Education</h3>
+            <div className="w-6 md:w-12 h-[1px] bg-primary" />
+          </div>
+
+          <div className="space-y-4 md:space-y-5">
+            {education.map((edu, idx) => (
+              <motion.div
+                key={edu.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
+                className="bg-card border border-border rounded-xl p-5 md:p-7 card-glow"
+              >
+                <div className="flex items-start gap-4 md:gap-5">
+                  <div className="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <edu.icon size={20} className="text-primary md:hidden" />
+                    <edu.icon size={26} className="text-primary hidden md:block" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 text-primary text-xs md:text-sm mb-1.5">
+                      <Calendar size={12} className="md:hidden" />
+                      <Calendar size={14} className="hidden md:block" />
+                      <span>{edu.period}</span>
+                      <span>•</span>
+                      <span className="font-semibold">{edu.score}</span>
+                    </div>
+                    <h4 className="text-base md:text-xl font-semibold mb-1">
+                      {edu.title}
+                    </h4>
+                    <div className="flex items-center gap-2 text-muted-foreground text-xs md:text-sm mb-3 flex-wrap">
+                      <Briefcase size={12} className="md:hidden" />
+                      <Briefcase size={14} className="hidden md:block" />
+                      <span>{edu.institution}</span>
+                      <span>•</span>
+                      <MapPin size={12} className="md:hidden" />
+                      <MapPin size={14} className="hidden md:block" />
+                      <span>{edu.location}</span>
+                    </div>
+                    <p className="text-muted-foreground text-xs md:text-sm flex items-start gap-2">
+                      <Award size={14} className="text-primary mt-0.5 flex-shrink-0" />
+                      <span>{edu.note}</span>
                     </p>
                   </div>
                 </div>

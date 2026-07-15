@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Sparkles, Instagram } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import ParticleBackground from './ParticleBackground';
 
@@ -18,7 +18,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-primary font-bold mb-4 text-xs md:text-sm uppercase tracking-[0.3em]"
           >
-            AI & Data Science Engineer
+            Generative AI Application Developer
           </motion.p>
 
           <motion.h1
@@ -32,9 +32,10 @@ const HeroSection = () => {
 
           <motion.p
             animate={{ opacity: 1, y: 0 }}
-            className="text-lg md:text-2xl text-muted-foreground max-w-xl mx-auto mb-12 font-medium leading-tight"
+            className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 font-medium leading-tight"
           >
-            Architecting <span className="text-foreground">Intelligent Systems</span> through data-driven innovation.
+            AI & Data Science graduate building AI-powered applications with
+            <span className="text-foreground"> Generative AI, LLMs, and Computer Vision</span>.
           </motion.p>
 
           <motion.div
@@ -66,7 +67,6 @@ const HeroSection = () => {
               { icon: Linkedin, href: "https://linkedin.com/in/senthilkumaran75", label: "LinkedIn" },
               { icon: Github, href: "https://github.com/SenthilkumaranPSK", label: "GitHub" },
               { icon: Mail, href: "mailto:senthil2005kumaran@gmail.com", label: "Email" },
-              { icon: Instagram, href: "https://www.instagram.com/senthil_75_", label: "Instagram" }
             ].map((social, idx) => (
               <motion.a
                 key={idx}

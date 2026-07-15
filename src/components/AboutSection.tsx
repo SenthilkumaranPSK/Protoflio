@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Download, User, Eye } from 'lucide-react';
+import { Download, Eye } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   Dialog,
@@ -33,16 +33,23 @@ const AboutSection = () => {
               animate={{ opacity: 1, scale: 1 }}
               className="md:col-span-2"
             >
-              <div className="relative">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                  className="absolute -inset-3 rounded-[2.5rem] border border-dashed border-primary/25"
+                />
                 <div
-                  className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-border card-glow"
-                  aria-label="Profile image of Senthilkumaran P"
+                  className="relative w-full h-full rounded-[2rem] bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center border border-border card-glow overflow-hidden"
+                  aria-label="Senthilkumaran P"
                   role="img"
                 >
-                  <User size={60} className="text-primary/50 sm:hidden" />
-                  <User size={80} className="text-primary/50 hidden sm:block" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.2),transparent_60%)]" />
+                  <span className="relative text-gradient text-6xl sm:text-7xl md:text-8xl font-black tracking-tight">
+                    SP
+                  </span>
                 </div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl -z-10" />
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-[2.5rem] blur-xl -z-10" />
               </div>
             </motion.div>
 
@@ -52,20 +59,17 @@ const AboutSection = () => {
               className="md:col-span-3"
             >
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
-                Passionate Data Science Engineer with strong expertise in{' '}
-                <span className="text-foreground font-medium">Python</span>,{' '}
+                I'm an <span className="text-foreground font-medium">AI & Data Science graduate</span> from Dhirajlal Gandhi College of Technology, Salem, with hands-on experience designing and developing AI-powered applications using{' '}
+                <span className="text-foreground font-medium">Generative AI</span>,{' '}
+                <span className="text-foreground font-medium">LLMs</span>,{' '}
                 <span className="text-foreground font-medium">Machine Learning</span>, and{' '}
-                <span className="text-foreground font-medium">Deep Learning</span>.
+                <span className="text-foreground font-medium">Computer Vision</span>.
               </p>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
-                Experienced in building real-time AI applications, including computer vision
-                systems and AI-powered financial assistants. Skilled in data preprocessing,
-                EDA, predictive modeling, and delivering actionable insights through hands-on
-                projects, hackathons, and internships.
+                I've built end-to-end AI solutions including multi-agent systems, RAG pipelines, and REST APIs using Python, LangChain, LangGraph, CrewAI, Google Gemini, TensorFlow, and FastAPI — delivered through internships, hackathons, and research initiatives.
               </p>
               <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8">
-                Currently focused on developing intelligent solutions that bridge the gap
-                between complex data and meaningful business outcomes.
+                Passionate about building scalable AI applications that solve real-world business challenges and continuously exploring emerging AI technologies.
               </p>
 
               <Dialog>

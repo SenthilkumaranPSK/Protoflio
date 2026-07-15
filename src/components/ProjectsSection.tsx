@@ -1,44 +1,57 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Sparkles, ArrowUpRight } from 'lucide-react';
+import { Github, ArrowUpRight } from 'lucide-react';
 import { Button } from './ui/button';
 
 const projects = [
   {
     title: 'AI-Powered Financial Assistant',
-    description: 'Autonomous agent leveraging LLMs for real-time market analysis and portfolio optimization.',
-    tech: ['Gemini LLM', 'Python', 'Streamlit'],
+    description: [
+      'Architected a multi-agent financial intelligence platform integrating Google Gemini, LangChain, and Model Context Protocol (MCP) to automate portfolio analysis, transaction monitoring, and personalized financial recommendations.',
+      'Designed intelligent AI agents capable of contextual reasoning, investment analysis, and wealth projection through modular workflows, enabling adaptive decision-making across diverse financial scenarios.',
+      'Developed a secure conversational interface using Flask and REST APIs, allowing users to interact with AI-powered financial insights through natural language while supporting scalable backend integration.'
+    ],
+    tech: ['Google Gemini', 'LangChain', 'MCP', 'Flask', 'REST APIs'],
     image: '/projects/financial.png',
     color: 'from-blue-500/20 to-cyan-500/20',
+    github: 'https://github.com/SenthilkumaranPSK',
   },
   {
-    title: 'Malpractice Detection System',
-    description: 'High-precision computer vision model for identifying suspicious behavior in proctored environments.',
-    tech: ['OpenCV', 'MediaPipe', 'PyTorch'],
-    image: '/projects/malpractice.png',
-    color: 'from-purple-500/20 to-pink-500/20',
-  },
-  {
-    title: 'Gesture Recognition Engine',
-    description: 'Deep learning based human-computer interaction system for touchless interface control.',
-    tech: ['TensorFlow', 'OpenCV', 'Python'],
+    title: 'Real-Time Face & Hand Gesture Detection',
+    description: [
+      'Engineered a real-time computer vision application using MediaPipe landmark detection and OpenCV to simultaneously analyze facial expressions and hand gestures with live visual feedback.',
+      'Implemented multi-modal gesture recognition for eye-state detection, smile recognition, and finger-count estimation, enabling intuitive human-computer interaction through real-time visual analytics.',
+      'Optimized the vision processing pipeline for sub-100ms inference latency on standard webcam hardware, delivering responsive real-time performance without dedicated GPU acceleration.'
+    ],
+    tech: ['Python', 'OpenCV', 'MediaPipe', 'Landmark Detection'],
     image: '/projects/gesture.png',
     color: 'from-orange-500/20 to-red-500/20',
+    github: 'https://github.com/SenthilkumaranPSK',
   },
   {
-    title: 'Plant Disease Diagnostic AI',
-    description: 'Neural network architecture for real-time leaf pathology classification and treatment advice.',
-    tech: ['CNN', 'Transfer Learning', 'Python'],
+    title: 'Student Malpractice Detection System',
+    description: [
+      'Developed an AI-powered examination monitoring system using a custom-trained YOLOv8 model to detect suspicious activities under diverse lighting and environmental conditions with robust real-time performance.',
+      'Designed a Flask-based monitoring dashboard providing live detection visualization, automated alerts, and behavioral analytics to support intelligent examination surveillance.',
+      'Applied custom dataset preparation, data augmentation, and model optimization techniques to improve detection accuracy, generalization, and real-time inference efficiency.'
+    ],
+    tech: ['Python', 'YOLOv8', 'OpenCV', 'Flask'],
+    image: '/projects/malpractice.png',
+    color: 'from-purple-500/20 to-pink-500/20',
+    github: 'https://github.com/SenthilkumaranPSK',
+  },
+  {
+    title: 'AI-Powered Plant Disease Detection',
+    description: [
+      'Architected an AI-powered plant disease diagnosis system leveraging transfer learning and convolutional neural networks (CNNs) to accurately classify plant leaf diseases from real-world agricultural images.',
+      'Integrated an intelligent treatment recommendation module delivering disease-specific guidance, enabling timely and informed decision-making for agricultural disease management.',
+      'Deployed the complete solution as a Flask-based web application, providing an accessible AI-assisted diagnostic platform for farmers and non-technical users.'
+    ],
+    tech: ['Python', 'TensorFlow', 'CNN', 'Transfer Learning', 'Flask'],
     image: '/projects/plant.png',
     color: 'from-green-500/20 to-emerald-500/20',
-  },
-  {
-    title: 'NLP Sentiment Analytics',
-    description: 'Enterprise-grade NLP pipeline for large-scale social sentiment tracking and visualization.',
-    tech: ['Scikit-Learn', 'Flask', 'NLTK'],
-    image: '/projects/sentiment.png',
-    color: 'from-indigo-500/20 to-violet-500/20',
+    github: 'https://github.com/SenthilkumaranPSK',
   },
 ];
 
@@ -90,12 +103,14 @@ const ProjectsSection = () => {
               {/* Content */}
               <div className="p-8 pt-0 -mt-12 relative z-10 flex flex-col flex-grow">
                 <div className="bg-card/80 backdrop-blur-xl border border-border/50 p-6 rounded-3xl mb-4 group-hover:border-primary/30 transition-colors shadow-xl flex-grow">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
+                  <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-6 line-clamp-3 leading-relaxed">
-                    {project.description}
-                  </p>
+                  <ul className="text-muted-foreground text-xs md:text-sm mb-6 space-y-2 leading-relaxed list-disc pl-4 marker:text-primary/60">
+                    {project.description.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
 
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
@@ -110,25 +125,21 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center justify-between px-2">
-                  <div className="flex gap-4">
-                    <motion.a
-                      href="#"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      whileHover={{ scale: 1.1 }}
+                <div className="flex items-center justify-end px-2">
+                  <Button
+                    variant="ghost"
+                    className="text-xs font-bold text-primary hover:bg-primary/10 rounded-full px-4 gap-2"
+                    asChild
+                  >
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} on GitHub`}
                     >
-                      <Github size={20} />
-                    </motion.a>
-                    <motion.a
-                      href="#"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <ExternalLink size={20} />
-                    </motion.a>
-                  </div>
-                  <Button variant="ghost" className="text-xs font-bold text-primary hover:bg-primary/10 rounded-full px-4">
-                    View Details
+                      <Github size={16} />
+                      View on GitHub
+                    </a>
                   </Button>
                 </div>
               </div>
