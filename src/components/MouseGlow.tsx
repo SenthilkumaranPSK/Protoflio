@@ -1,25 +1,27 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const MouseGlow = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Direct style mutation avoids a React re-render on every mousemove.
+      glowRef.current?.style.setProperty('--glow-x', `${e.clientX}px`);
+      glowRef.current?.style.setProperty('--glow-y', `${e.clientY}px`);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <motion.div
+    <div
+      ref={glowRef}
       className="pointer-events-none fixed inset-0 z-30"
-      animate={{
-        background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, hsl(199 89% 48% / 0.08), transparent 80%)`,
+      style={{
+        background:
+          'radial-gradient(600px at var(--glow-x, 50%) var(--glow-y, 50%), hsl(199 89% 48% / 0.08), transparent 80%)',
       }}
-      transition={{ type: 'tween', ease: 'linear', duration: 0.1 }}
     />
   );
 };

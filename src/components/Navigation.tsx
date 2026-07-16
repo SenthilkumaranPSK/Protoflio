@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, useSpring, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { EASE_BUTTER, tapScale } from '@/lib/motion';
 
 type NavItem = { name: string; href: string };
 
@@ -55,14 +56,13 @@ const Navigation = () => {
   const NavLinkContent = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean }) => {
     const isActive = item.href === `#${activeSection}` || (item.href === '/' && isHomePage && !activeSection);
     return (
-      <motion.span
-        animate={{ opacity: 1, y: 0 }}
+      <span
         className={isMobile
           ? `block py-4 transition-all duration-300 font-bold text-xl uppercase tracking-widest text-center ${isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`
           : `nav-link text-[10px] lg:text-[11px] font-black tracking-[0.2em] cursor-pointer uppercase ${isActive ? 'active text-primary' : ''}`}
       >
         {item.name}
-      </motion.span>
+      </span>
     );
   };
 
@@ -97,7 +97,9 @@ const Navigation = () => {
 
   return (
     <motion.nav
-      animate={{ y: 0 }}
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: EASE_BUTTER }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none"
     >
       <motion.div
@@ -125,13 +127,41 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button Container */}
-          <div className="md:hidden flex items-center">
-            <button
-              className="text-foreground p-2 hover:bg-white/5 rounded-full transition-colors"
+          <div className="md:hidden flex items-center gap-2">
+            {!isMobileMenuOpen && (
+              <Link
+                to="/"
+                onClick={(e) => {
+                  if (isHomePage) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+                className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 border border-border flex-shrink-0"
+                aria-label="Back to home"
+              >
+                <span className="text-gradient text-xs font-black tracking-tight">SP</span>
+              </Link>
+            )}
+            <motion.button
+              whileTap={tapScale}
+              className="text-foreground w-11 h-11 flex items-center justify-center hover:bg-white/5 rounded-full transition-colors flex-shrink-0"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={isMobileMenuOpen ? 'close' : 'open'}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="block"
+                >
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </motion.span>
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
       </motion.div>
@@ -146,11 +176,24 @@ const Navigation = () => {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 bg-background/60 z-[-1] flex flex-col items-center justify-center p-8 md:hidden pointer-events-auto"
           >
-            <div className="flex flex-col gap-6 items-center w-full">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+              className="flex flex-col gap-6 items-center w-full"
+            >
               {navItems.map((item) => (
-                <NavLink key={item.name} item={item} isMobile />
+                <motion.div
+                  key={item.name}
+                  variants={{
+                    hidden: { opacity: 0, y: 16 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_BUTTER } },
+                  }}
+                >
+                  <NavLink item={item} isMobile />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

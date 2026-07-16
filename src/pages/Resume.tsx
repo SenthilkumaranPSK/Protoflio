@@ -7,7 +7,7 @@ const ResumePage = () => {
         <div className="min-h-screen bg-background text-foreground flex flex-col">
 
             {/* Resume Viewer Container */}
-            <main className="flex-grow pt-28 pb-12 px-4 md:px-8">
+            <div className="flex-grow pt-28 pb-12 px-4 md:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ const ResumePage = () => {
                         </a>
                     </Button>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };

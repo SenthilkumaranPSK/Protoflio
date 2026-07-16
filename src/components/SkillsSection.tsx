@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { Code, Brain, Wrench, Database, Cpu, Eye } from 'lucide-react';
+import { fadeInUp, spring, staggerContainer, viewport } from '@/lib/motion';
+import GradientBlob from './GradientBlob';
 
 const skillCategories = [
   {
@@ -56,16 +56,16 @@ const skillCategories = [
 ];
 
 const SkillsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
-    <section id="skills" className="py-24 relative overflow-hidden" ref={ref}>
+    <section id="skills" className="py-24 relative overflow-hidden">
+      <GradientBlob color="primary" className="w-96 h-96 top-6 left-6" />
+      <GradientBlob color="secondary" className="w-[28rem] h-[28rem] bottom-6 right-6" />
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={fadeInUp}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter">
@@ -73,14 +73,18 @@ const SkillsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 max-w-5xl mx-auto">
-          {skillCategories.map((category, idx) => (
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={staggerContainer(0.08)}
+          className="columns-1 sm:columns-2 lg:columns-3 gap-5 max-w-5xl mx-auto"
+        >
+          {skillCategories.map((category) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
+              variants={fadeInUp}
+              whileHover={{ y: -6, transition: spring }}
               className={`group relative mb-5 break-inside-avoid p-5 rounded-2xl border border-border bg-card/50 backdrop-blur-sm card-glow overflow-hidden ${category.className}`}
             >
               <div className="relative z-10 flex flex-col">
@@ -105,7 +109,7 @@ const SkillsSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

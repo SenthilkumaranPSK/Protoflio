@@ -1,16 +1,15 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Mail, Linkedin, Send, MapPin, Phone, Github } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { fadeInLeft, fadeInRight, fadeInUp, spring, staggerContainer, viewport } from '@/lib/motion';
+import GradientBlob from './GradientBlob';
 
 const ContactSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -56,12 +55,15 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-secondary/30" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="contact" className="py-16 md:py-24 bg-gradient-to-b from-transparent via-secondary/40 to-transparent relative overflow-hidden">
+      <GradientBlob color="secondary" className="w-[26rem] h-[26rem] top-6 left-6" />
+      <GradientBlob color="primary" className="w-96 h-96 bottom-6 right-6" />
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={fadeInUp}
           className="text-center mb-10 md:mb-16"
         >
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-4">
@@ -77,17 +79,25 @@ const ContactSection = () => {
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={fadeInLeft}
           >
             <h3 className="text-lg md:text-xl font-semibold mb-4 md:mb-6">Get in Touch</h3>
-            
-            <div className="space-y-3 md:space-y-4">
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+              variants={staggerContainer(0.08, 0.2)}
+              className="space-y-3 md:space-y-4"
+            >
               <motion.a
                 href="tel:+919443726090"
+                variants={fadeInUp}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
-                whileHover={{ x: 5 }}
+                whileHover={{ x: 5, transition: spring }}
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Phone size={18} className="text-primary md:hidden" />
@@ -101,8 +111,9 @@ const ContactSection = () => {
 
               <motion.a
                 href="mailto:senthil2005kumaran@gmail.com"
+                variants={fadeInUp}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
-                whileHover={{ x: 5 }}
+                whileHover={{ x: 5, transition: spring }}
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Mail size={18} className="text-primary md:hidden" />
@@ -118,8 +129,9 @@ const ContactSection = () => {
                 href="https://linkedin.com/in/senthilkumaran75"
                 target="_blank"
                 rel="noopener noreferrer"
+                variants={fadeInUp}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
-                whileHover={{ x: 5 }}
+                whileHover={{ x: 5, transition: spring }}
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Linkedin size={18} className="text-primary md:hidden" />
@@ -135,8 +147,9 @@ const ContactSection = () => {
                 href="https://github.com/SenthilkumaranPSK"
                 target="_blank"
                 rel="noopener noreferrer"
+                variants={fadeInUp}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl card-glow"
-                whileHover={{ x: 5 }}
+                whileHover={{ x: 5, transition: spring }}
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Github size={18} className="text-primary md:hidden" />
@@ -148,7 +161,10 @@ const ContactSection = () => {
                 </div>
               </motion.a>
 
-              <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl">
+              <motion.div
+                variants={fadeInUp}
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-card border border-border rounded-xl"
+              >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <MapPin size={18} className="text-primary md:hidden" />
                   <MapPin size={20} className="text-primary hidden md:block" />
@@ -157,15 +173,16 @@ const ContactSection = () => {
                   <p className="text-xs md:text-sm text-muted-foreground">Location</p>
                   <p className="font-medium text-sm md:text-base">Salem, Tamil Nadu</p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={fadeInRight}
           >
             <h3 className="text-lg md:text-xl font-semibold mb-4 md:mb-6">Send a Message</h3>
             
@@ -179,7 +196,7 @@ const ContactSection = () => {
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-card border-border focus:border-primary"
+                  className="h-12 bg-card border-border focus:border-primary"
                   required
                 />
               </div>
@@ -191,7 +208,7 @@ const ContactSection = () => {
                   placeholder="Your Email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-card border-border focus:border-primary"
+                  className="h-12 bg-card border-border focus:border-primary"
                   required
                 />
               </div>
@@ -209,7 +226,7 @@ const ContactSection = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 disabled:opacity-60"
+                className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground gap-2 disabled:opacity-60"
               >
                 <Send size={18} />
                 {isSubmitting ? 'Sending...' : 'Send Message'}

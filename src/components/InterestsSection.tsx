@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { Palette, Trophy } from 'lucide-react';
+import { fadeInUp, spring, staggerContainer, viewport } from '@/lib/motion';
+import GradientBlob from './GradientBlob';
 
 const interests = [
   {
@@ -21,16 +21,15 @@ const interests = [
 ];
 
 const InterestsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
-    <section className="py-16 md:py-24 bg-secondary/30" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-transparent via-secondary/40 to-transparent relative overflow-hidden">
+      <GradientBlob color="primary" className="w-96 h-96 top-6 right-6" />
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={fadeInUp}
           className="text-center mb-10 md:mb-16"
         >
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-4">
@@ -43,14 +42,18 @@ const InterestsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-3xl mx-auto">
-          {interests.map((item, idx) => (
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={staggerContainer(0.1)}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 max-w-3xl mx-auto"
+        >
+          {interests.map((item) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
+              variants={fadeInUp}
+              whileHover={{ y: -6, transition: spring }}
               className={`group relative p-6 md:p-8 rounded-3xl border border-border bg-card/50 backdrop-blur-sm card-glow overflow-hidden bg-gradient-to-br ${item.tint}`}
             >
               <div className="relative z-10 flex items-start gap-4 md:gap-5">
@@ -68,7 +71,7 @@ const InterestsSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

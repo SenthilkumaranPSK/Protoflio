@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { Briefcase, Calendar, MapPin, GraduationCap, Award } from 'lucide-react';
+import { fadeInUp, staggerContainer, viewport } from '@/lib/motion';
+import GradientBlob from './GradientBlob';
 
 const experiences = [
   {
@@ -43,16 +43,15 @@ const education = [
 ];
 
 const ExperienceSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
-    <section id="experience" className="py-16 md:py-24 bg-secondary/30" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="experience" className="py-16 md:py-24 bg-gradient-to-b from-transparent via-secondary/40 to-transparent relative overflow-hidden">
+      <GradientBlob color="primary" className="w-96 h-96 top-10 right-6" />
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={fadeInUp}
           className="text-center mb-10 md:mb-16"
         >
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-4">
@@ -65,7 +64,13 @@ const ExperienceSection = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={staggerContainer(0.2)}
+          className="max-w-3xl mx-auto"
+        >
           {/* Timeline */}
           <div className="relative">
             {/* Timeline line */}
@@ -74,9 +79,7 @@ const ExperienceSection = () => {
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.role + exp.company}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                variants={fadeInUp}
                 className={`relative flex items-start gap-4 sm:gap-6 mb-8 md:mb-12 ${
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
@@ -117,10 +120,16 @@ const ExperienceSection = () => {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Education */}
-        <div className="max-w-3xl mx-auto mt-16 md:mt-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={staggerContainer(0.1)}
+          className="max-w-3xl mx-auto mt-16 md:mt-20"
+        >
           <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 justify-center">
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center">Education</h3>
@@ -128,12 +137,10 @@ const ExperienceSection = () => {
           </div>
 
           <div className="space-y-4 md:space-y-5">
-            {education.map((edu, idx) => (
+            {education.map((edu) => (
               <motion.div
                 key={edu.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
+                variants={fadeInUp}
                 className="bg-card border border-border rounded-xl p-5 md:p-7 card-glow"
               >
                 <div className="flex items-start gap-4 md:gap-5">
@@ -170,7 +177,7 @@ const ExperienceSection = () => {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

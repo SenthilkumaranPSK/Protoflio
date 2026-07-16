@@ -1,7 +1,34 @@
-import { motion } from 'framer-motion';
+import { type ReactNode, type MouseEvent as ReactMouseEvent } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import ParticleBackground from './ParticleBackground';
+import { fadeInBlur, fadeInUp, scaleIn, springSnappy, staggerContainer, tapScale } from '@/lib/motion';
+
+/** Subtly pulls toward the cursor within its bounds, springs back on leave. */
+const Magnetic = ({ children, strength = 0.35 }: { children: ReactNode; strength?: number }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.4 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.4 });
+
+  const handleMouseMove = (e: ReactMouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left - rect.width / 2) * strength);
+    y.set((e.clientY - rect.top - rect.height / 2) * strength);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div style={{ x: springX, y: springY }} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+      {children}
+    </motion.div>
+  );
+};
 
 const HeroSection = () => {
   return (
@@ -13,25 +40,28 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background z-1" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer(0.14, 0.1)}
+          className="max-w-4xl mx-auto text-center"
+        >
           <motion.p
-            animate={{ opacity: 1, y: 0 }}
+            variants={fadeInUp}
             className="text-primary font-bold mb-4 text-xs md:text-sm uppercase tracking-[0.3em]"
           >
             Generative AI Application Developer
           </motion.p>
 
           <motion.h1
-            animate={{ opacity: 1, y: 0 }}
+            variants={fadeInBlur}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black mb-8 tracking-tighter text-center"
           >
-            Senthil<span className="text-gradient">kumaran</span>&nbsp;P
+            Senthil<span className="text-gradient-animated">kumaran</span>&nbsp;P
           </motion.h1>
 
-
-
           <motion.p
-            animate={{ opacity: 1, y: 0 }}
+            variants={fadeInUp}
             className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 font-medium leading-tight"
           >
             AI & Data Science graduate building AI-powered applications with
@@ -39,28 +69,36 @@ const HeroSection = () => {
           </motion.p>
 
           <motion.div
-            animate={{ opacity: 1, y: 0 }}
+            variants={fadeInUp}
             className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
           >
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-8 text-xl rounded-2xl transition-all hover:shadow-[0_0_30px_rgba(var(--primary),0.3)] shadow-xl shadow-primary/20"
-              asChild
-            >
-              <a href="#projects">Recent Work</a>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary/20 hover:bg-primary/5 font-bold px-12 py-8 text-xl rounded-2xl transition-all"
-              asChild
-            >
-              <a href="#contact">Contact</a>
-            </Button>
+            <Magnetic>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={tapScale} transition={springSnappy}>
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-6 text-base sm:px-12 sm:py-8 sm:text-xl rounded-2xl transition-shadow hover:shadow-[0_0_40px_rgba(var(--primary),0.4)] shadow-xl shadow-primary/20 w-full sm:w-auto"
+                  asChild
+                >
+                  <a href="#projects">Recent Work</a>
+                </Button>
+              </motion.div>
+            </Magnetic>
+            <Magnetic>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={tapScale} transition={springSnappy}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-primary/20 hover:bg-primary/5 font-bold px-8 py-6 text-base sm:px-12 sm:py-8 sm:text-xl rounded-2xl transition-colors w-full sm:w-auto"
+                  asChild
+                >
+                  <a href="#contact">Contact</a>
+                </Button>
+              </motion.div>
+            </Magnetic>
           </motion.div>
 
           <motion.div
-            animate={{ opacity: 1 }}
+            variants={fadeInUp}
             className="flex justify-center gap-8"
           >
             {[
@@ -74,7 +112,9 @@ const HeroSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -8, scale: 1.1 }}
+                whileTap={tapScale}
+                transition={springSnappy}
                 aria-label={`Visit my ${social.label}`}
               >
                 <div className="p-3 rounded-full bg-secondary group-hover:bg-primary/10 border border-border group-hover:border-primary/30 transition-all">
@@ -86,19 +126,26 @@ const HeroSection = () => {
               </motion.a>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
+        variants={scaleIn}
+        initial="hidden"
+        animate="visible"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
       >
-        <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Scroll</span>
-        <a href="#about" className="text-primary/70 hover:text-primary transition-colors">
-          <ArrowDown size={20} />
-        </a>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center gap-2"
+        >
+          <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Scroll</span>
+          <a href="#about" className="text-primary/70 hover:text-primary transition-colors">
+            <ArrowDown size={20} />
+          </a>
+        </motion.div>
       </motion.div>
     </section>
   );

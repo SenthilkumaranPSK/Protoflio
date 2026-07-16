@@ -1,6 +1,4 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { Download, Eye } from 'lucide-react';
 import { Button } from './ui/button';
 import {
@@ -10,16 +8,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog';
+import { fadeInRight, fadeInUp, scaleIn, viewport } from '@/lib/motion';
+import GradientBlob from './GradientBlob';
 
 const AboutSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
   return (
-    <section id="about" className="py-16 md:py-24 relative" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
+      <GradientBlob color="secondary" className="w-96 h-96 top-6 right-6" />
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          animate={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={fadeInUp}
           className="max-w-5xl mx-auto"
         >
           <div className="flex items-center gap-3 mb-8 md:mb-12">
@@ -30,7 +31,7 @@ const AboutSection = () => {
           <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
             {/* Profile Image */}
             <motion.div
-              animate={{ opacity: 1, scale: 1 }}
+              variants={scaleIn}
               className="md:col-span-2"
             >
               <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto">
@@ -55,7 +56,7 @@ const AboutSection = () => {
 
             {/* Content */}
             <motion.div
-              animate={{ opacity: 1, x: 0 }}
+              variants={fadeInRight}
               className="md:col-span-3"
             >
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">

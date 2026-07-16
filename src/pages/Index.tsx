@@ -1,5 +1,3 @@
-import MouseGlow from '@/components/MouseGlow';
-import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
@@ -8,11 +6,10 @@ import ExperienceSection from '@/components/ExperienceSection';
 import CertificationsSection from '@/components/CertificationsSection';
 import InterestsSection from '@/components/InterestsSection';
 import ContactSection from '@/components/ContactSection';
-import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <main>
+    <>
       <HeroSection />
       <AboutSection />
       <SkillsSection />
@@ -21,7 +18,7 @@ const Index = () => {
       <CertificationsSection />
       <InterestsSection />
       <ContactSection />
-    </main>
+    </>
   );
 };
 
