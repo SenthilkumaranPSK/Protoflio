@@ -26,7 +26,7 @@ const ResumePage = () => {
                         <div>
                             <div className="flex items-center gap-2">
                                 <h1 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
-                                    Applied AI Resume
+                                    Resume
                                 </h1>
                                 <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25">
                                     <Sparkles size={10} />
@@ -75,7 +75,7 @@ const ResumePage = () => {
                     <iframe
                         src="/resume.pdf#toolbar=1"
                         className="w-full h-full border-none"
-                        title="Senthilkumaran P — Applied AI Resume"
+                        title="Senthilkumaran P — Resume"
                     />
                 </motion.div>
 
@@ -84,7 +84,7 @@ const ResumePage = () => {
                     <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 rounded-2xl py-6 font-bold text-base shadow-xl shadow-primary/25" asChild>
                         <a href="/resume.pdf" download="Senthilkumaran_Resume.pdf">
                             <Download size={18} />
-                            Download Applied AI Resume (PDF)
+                            Download Resume (PDF)
                         </a>
                     </Button>
                 </div>

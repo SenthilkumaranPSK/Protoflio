@@ -96,7 +96,7 @@ const AboutSection = () => {
                 >
                   <DialogHeader className="px-5 pr-12 py-3 border-b border-border flex flex-row items-center justify-between space-y-0 min-h-0 bg-secondary/20">
                     <DialogTitle className="text-xs font-bold tracking-wider text-foreground/70 uppercase">
-                      Senthilkumaran P — Applied AI Resume
+                      Senthilkumaran P — Resume
                     </DialogTitle>
                     <Button size="sm" className="h-8 px-3.5 bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5 rounded-lg text-xs font-bold" asChild>
                       <a href="/resume.pdf" download="Senthilkumaran_Resume.pdf">
@@ -121,7 +121,7 @@ const AboutSection = () => {
               >
                 <a href="/resume.pdf" download="Senthilkumaran_Resume.pdf">
                   <Download size={16} />
-                  Download Applied AI Resume
+                  Download Resume
                 </a>
               </Button>
             </div>

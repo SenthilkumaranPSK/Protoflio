@@ -332,8 +332,6 @@ const ProjectsSection = () => {
     activeCategory === 'all' ? true : project.categories.includes(activeCategory)
   );
 
-  const flagships = [projects[0], projects[1]]; // Maestro-Billing and AUREXIS AI
-
   return (
     <section ref={sectionRef} id="projects" className="py-20 md:py-28 relative overflow-hidden">
       <GradientBlob color="secondary" className="w-[32rem] h-[32rem] top-6 right-6" />
@@ -347,7 +345,7 @@ const ProjectsSection = () => {
           whileInView="visible"
           viewport={viewport}
           variants={fadeInUp}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-12"
         >
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-3">
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
@@ -357,100 +355,12 @@ const ProjectsSection = () => {
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
           </div>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Production systems shipped for paying clients, published AI research, and high-performance engineering repositories.
+            Production software shipped for paying clients, first-author published AI research, and high-performance engineering repositories.
           </p>
         </motion.div>
 
-        {/* Flagship Production & Research Spotlight (Bento 2-Column) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={staggerContainer(0.1)}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-7xl mx-auto mb-16"
-        >
-          {flagships.map((flagship) => (
-            <motion.div
-              key={`flagship-${flagship.title}`}
-              variants={fadeInUp}
-              className="relative p-7 sm:p-9 rounded-[2.2rem] border border-primary/40 bg-card/70 backdrop-blur-xl card-glow shadow-2xl flex flex-col justify-between overflow-hidden group hover:border-primary/60 transition-all"
-            >
-              <div className={`absolute top-0 inset-x-0 h-44 bg-gradient-to-b ${flagship.color} opacity-40 pointer-events-none`} />
-              
-              <div className="relative z-10">
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full bg-primary/25 text-primary border border-primary/40 shadow-sm">
-                    <Sparkles size={12} />
-                    {flagship.badge}
-                  </span>
-                  <span className="text-xs font-mono text-muted-foreground font-semibold">Flagship System</span>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors mb-1.5">
-                  {flagship.title}
-                </h3>
-                <p className="text-xs sm:text-sm font-semibold text-primary/95 mb-4">
-                  {flagship.subtitle}
-                </p>
-
-                <ul className="text-muted-foreground text-xs sm:text-sm space-y-2.5 leading-relaxed list-disc pl-4 marker:text-primary mb-6">
-                  {flagship.description.map((point, idx) => (
-                    <li key={idx}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="relative z-10 pt-4 border-t border-border/70">
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-5">
-                  {flagship.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 text-[11px] font-semibold bg-secondary/90 text-foreground/90 rounded-lg border border-border/70"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <Button
-                    size="sm"
-                    className="flex-1 bg-secondary hover:bg-primary/20 hover:text-primary border border-border hover:border-primary/40 text-foreground font-bold rounded-xl text-xs gap-1.5 py-5 transition-all"
-                    asChild
-                  >
-                    <a href={flagship.github} target="_blank" rel="noopener noreferrer">
-                      <Github size={15} />
-                      GitHub Repository
-                    </a>
-                  </Button>
-
-                  {flagship.live && (
-                    <Button
-                      size="sm"
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl text-xs gap-1.5 py-5 px-5 shadow-lg shadow-primary/25"
-                      asChild
-                    >
-                      <a href={flagship.live} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink size={14} />
-                        Live Demo
-                      </a>
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Section Sub-Divider for Complete Catalog */}
-        <div className="flex items-center justify-center gap-3 max-w-md mx-auto mb-10">
-          <div className="h-[1px] flex-1 bg-border/80" />
-          <span className="text-xs uppercase tracking-widest font-extrabold text-muted-foreground">Engineering Catalog</span>
-          <div className="h-[1px] flex-1 bg-border/80" />
-        </div>
-
         {/* Category Tabs */}
-        <div className="flex justify-center mb-10 px-2 overflow-x-auto no-scrollbar">
+        <div className="flex justify-center mb-12 px-2 overflow-x-auto no-scrollbar">
           <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-secondary/60 border border-border/80 backdrop-blur-md">
             {categoriesList.map((cat) => (
               <button
@@ -475,7 +385,7 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        {/* Filtered Projects Grid */}
+        {/* Projects Cards Grid (No repetition) */}
         <motion.div
           layout
           initial="hidden"
