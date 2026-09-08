@@ -3,6 +3,7 @@ import { motion, useScroll, useMotionValueEvent, useSpring, AnimatePresence } fr
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { EASE_BUTTER, tapScale } from '@/lib/motion';
+import { useLenis } from '@/hooks/use-lenis';
 
 type NavItem = { name: string; href: string };
 
@@ -12,6 +13,7 @@ const navItems: NavItem[] = [
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
+  { name: 'Resume', href: '/resume' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -26,6 +28,7 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState('');
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
+  const lenis = useLenis();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -75,12 +78,33 @@ const Navigation = () => {
       if (isInternalAnchor) {
         if (isHomePage) {
           e.preventDefault();
-          const el = document.querySelector(item.href);
-          el?.scrollIntoView({ behavior: 'smooth' });
+          const targetId = item.href.replace('#', '');
+          const el = document.getElementById(targetId);
+          if (el) {
+            const yOffset = -70;
+            const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+            if (lenis) {
+              try {
+                lenis.scrollTo(el, { offset: -70 });
+              } catch {
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }
+            } else {
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          }
         }
       } else if (item.href === '/' && isHomePage) {
         e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (lenis) {
+          try {
+            lenis.scrollTo(0);
+          } catch {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     };
 
@@ -134,7 +158,8 @@ const Navigation = () => {
                 onClick={(e) => {
                   if (isHomePage) {
                     e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (lenis) lenis.scrollTo(0);
+                    else window.scrollTo({ top: 0, behavior: 'smooth' });
                   }
                 }}
                 className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 border border-border flex-shrink-0"

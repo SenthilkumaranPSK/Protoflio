@@ -220,6 +220,23 @@
     @apply bg-background/40 backdrop-blur-md border border-white/10;
   }
 
+  /* Natural cursor support */
+  input, textarea, select {
+    cursor: text !important;
+  }
+  
+  a, button, [role="button"] {
+    cursor: pointer !important;
+  }
+
+  .cursor-ring.cursor-hover {
+    width: 64px;
+    height: 64px;
+    margin-left: -32px;
+    margin-top: -32px;
+    background-color: hsl(var(--primary) / 0.12);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -232,6 +249,11 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+
+    .has-custom-cursor,
+    .has-custom-cursor * {
+      cursor: auto !important;
     }
   }
 }

@@ -89,6 +89,10 @@ export default {
           "33%": { transform: "translate(30px, -40px) scale(1.15)" },
           "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -96,8 +100,10 @@ export default {
         float: "float 3s ease-in-out infinite",
         pulse: "pulse 2s ease-in-out infinite",
         blob: "blob 12s ease-in-out infinite",
+        marquee: "marquee 30s linear infinite",
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

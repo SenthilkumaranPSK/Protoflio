@@ -18,14 +18,15 @@ export const springSnappy: Transition = {
 
 export const tapScale = { scale: 0.96 };
 
-export const viewport = { once: true, margin: '-80px' };
+/** Fires once an element has scrolled up into roughly the lower third of the viewport. */
+export const viewport = { once: true, margin: '0px 0px -33% 0px' };
 
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 56 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.85, ease: EASE_BUTTER },
+    transition: { duration: 0.6, ease: EASE_BUTTER },
   },
 };
 
