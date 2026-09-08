@@ -95,7 +95,7 @@ const ExperienceSection = () => {
               <motion.div
                 key={exp.role + exp.company}
                 variants={fadeInUp}
-                className={`relative flex items-start gap-4 sm:gap-6 mb-10 md:mb-14 ${
+                className={`relative flex items-start gap-4 sm:gap-6 mb-8 md:mb-12 ${
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
@@ -132,59 +132,6 @@ const ExperienceSection = () => {
 
                     <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                       {exp.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Education */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={staggerContainer(0.1)}
-          className="max-w-4xl mx-auto mt-16 md:mt-24"
-        >
-          <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8 justify-center">
-            <div className="w-6 md:w-12 h-[1px] bg-primary" />
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">Education</h3>
-            <div className="w-6 md:w-12 h-[1px] bg-primary" />
-          </div>
-
-          <div className="space-y-4 md:space-y-5">
-            {education.map((edu) => (
-              <motion.div
-                key={edu.title}
-                variants={fadeInUp}
-                className="bg-card/70 backdrop-blur-md border border-border/80 rounded-2xl p-6 md:p-8 card-glow hover:border-primary/40 transition-colors"
-              >
-                <div className="flex items-start gap-4 md:gap-6">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center flex-shrink-0 text-primary">
-                    <edu.icon size={26} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 text-primary text-xs md:text-sm mb-1.5 font-semibold">
-                      <Calendar size={13} />
-                      <span>{edu.period}</span>
-                      <span>•</span>
-                      <span className="px-2 py-0.5 rounded-md bg-primary/20 text-primary font-bold border border-primary/30">{edu.score}</span>
-                    </div>
-                    <h4 className="text-lg md:text-2xl font-bold text-foreground mb-1">
-                      {edu.title}
-                    </h4>
-                    <div className="flex items-center gap-2 text-muted-foreground text-xs md:text-sm mb-3 flex-wrap">
-                      <Briefcase size={13} />
-                      <span className="font-semibold text-foreground/90">{edu.institution}</span>
-                      <span>•</span>
-                      <MapPin size={13} />
-                      <span>{edu.location}</span>
-                    </div>
-                    <p className="text-muted-foreground text-xs md:text-sm flex items-start gap-2 leading-relaxed">
-                      <Award size={15} className="text-primary mt-0.5 flex-shrink-0" />
-                      <span>{edu.note}</span>
                     </p>
                   </div>
                 </div>

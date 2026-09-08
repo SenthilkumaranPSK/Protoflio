@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
-import { Award, Trophy, Medal, Star, FileCheck2, BookOpen, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Trophy, Medal, Star, FileCheck2 } from 'lucide-react';
 import { EASE_BUTTER, fadeInUp, spring, staggerContainer, viewport } from '@/lib/motion';
 import GradientBlob from './GradientBlob';
-import { Button } from './ui/button';
 
-const achievementsAndCerts = [
+const topAccolades = [
   {
     icon: Star,
     title: 'Google Agentic AI Day 2025 Hackathon',
@@ -27,46 +26,11 @@ const achievementsAndCerts = [
     highlight: 'GenAI Summarizer',
   },
   {
-    icon: Medal,
-    title: 'Agentic Website Track',
-    issuer: 'Bengaluru AI Hack Day — Participated',
-    type: 'achievement',
-    highlight: 'Hackathon Finalist',
-  },
-  {
-    icon: Award,
-    title: 'National Hackathon on Human-Wildlife Coexistence',
-    issuer: 'Ministry of Environment, Govt. of India & WII Dehradun',
-    type: 'achievement',
-    highlight: 'National Hackathon',
-  },
-  {
     icon: FileCheck2,
     title: 'NPTEL Design Thinking: A Primer',
     issuer: 'IIT Madras (Elite Score, 2026)',
     type: 'certification',
     highlight: 'IIT Madras Elite',
-  },
-  {
-    icon: FileCheck2,
-    title: 'Google Cloud Skill Badge: Multimodal Gemini RAG',
-    issuer: 'Google Cloud — Inspect Rich Documents with Gemini',
-    type: 'certification',
-    highlight: 'Google Cloud',
-  },
-  {
-    icon: FileCheck2,
-    title: 'Machine Learning Specialization',
-    issuer: 'LIVEWIRE (Sep 2024 – Mar 2025)',
-    type: 'certification',
-    highlight: 'Specialization',
-  },
-  {
-    icon: FileCheck2,
-    title: 'Master in Data Analysis and Analytics',
-    issuer: 'Udemy — Comprehensive Data Science Certification',
-    type: 'certification',
-    highlight: 'Analytics Mastery',
   },
 ];
 
@@ -86,72 +50,18 @@ const CertificationsSection = () => {
           whileInView="visible"
           viewport={viewport}
           variants={fadeInUp}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-12 md:mb-14"
         >
           <div className="flex items-center justify-center gap-2 md:gap-3 mb-3">
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-center">
-              Publications &amp; <span className="text-gradient">Recognition</span>
+              Honors &amp; <span className="text-gradient">Accolades</span>
             </h2>
             <div className="w-6 md:w-12 h-[1px] bg-primary" />
           </div>
           <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto px-2">
-            First-author academic research, hackathon accolades, and industry-certified technical skills.
+            Hackathon achievements and certified technical milestones.
           </p>
-        </motion.div>
-
-        {/* Featured Research Publication Card */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={fadeInUp}
-          className="max-w-4xl mx-auto mb-12"
-        >
-          <div className="relative p-6 sm:p-8 rounded-3xl border border-primary/40 bg-card/60 backdrop-blur-md card-glow shadow-2xl overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center flex-shrink-0 text-primary">
-                  <BookOpen size={28} />
-                </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-2">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">
-                      <Sparkles size={11} />
-                      First Author Publication (1 of 7)
-                    </span>
-                    <span className="text-xs text-muted-foreground font-semibold">
-                      IJIRT · Vol. 12, Issue 12 · May 2026
-                    </span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-                    AUREXIS AI: A Cognitive AI-based System for Real-Time Financial Analysis and Decision Support
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed max-w-2xl">
-                    Coordinated autonomous multi-agent architecture for financial data ingestion, weighted risk scoring, and time-series simulations published in the International Journal of Innovative Research in Technology (pp. 3521–3529).
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex-shrink-0 w-full md:w-auto">
-                <Button
-                  className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl text-xs gap-2 px-5 py-5 shadow-lg shadow-primary/20"
-                  asChild
-                >
-                  <a
-                    href="https://ijirt.org/article?manuscript=200876"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span>Read Paper</span>
-                    <ExternalLink size={14} />
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Hackathons & Certifications Grid */}
@@ -162,7 +72,7 @@ const CertificationsSection = () => {
           variants={staggerContainer(0.08)}
           className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
-          {achievementsAndCerts.map((cert) => (
+          {topAccolades.map((cert) => (
             <motion.div
               key={cert.title}
               variants={itemVariants}

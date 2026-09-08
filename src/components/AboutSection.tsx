@@ -39,30 +39,30 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        {/* Bento Grid Architecture */}
+        {/* Bento Grid Architecture (Clean 2-Column Layout) */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
           variants={staggerContainer(0.08)}
-          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 max-w-6xl mx-auto"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-5xl mx-auto"
         >
           
-          {/* Card 1: Main Bio & Identity (Spans 2 columns) */}
+          {/* Card 1: Main Bio & Identity (Spans 7 cols) */}
           <motion.div
             variants={fadeInUp}
-            className="md:col-span-2 p-6 sm:p-8 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md card-glow flex flex-col justify-between relative overflow-hidden group hover:border-primary/40 transition-all"
+            className="lg:col-span-7 p-6 sm:p-8 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md card-glow flex flex-col justify-between group hover:border-primary/40 transition-all"
           >
-            <div className="relative z-10">
+            <div>
               <div className="flex items-center gap-4 mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 flex items-center justify-center font-black text-xl text-gradient shadow-md">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 flex items-center justify-center font-black text-lg text-gradient shadow-md">
                   SP
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                  <h3 className="text-xl font-bold text-foreground">
                     Applied AI &amp; Software Engineer
                   </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2 mt-0.5">
+                  <p className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5">
                     <span>Salem, Tamil Nadu, India</span>
                     <span>•</span>
                     <span className="text-primary font-semibold">Available for Roles</span>
@@ -70,17 +70,17 @@ const AboutSection = () => {
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
-                I am an <span className="text-foreground font-semibold">AI &amp; Data Science graduate</span> (May 2026, <span className="text-foreground font-semibold">CGPA: 7.85 / 10</span>) with proven experience shipping production software to paying clients, designing multi-modal agent workflows, and publishing academic research in cognitive AI architectures.
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                I am an <span className="text-foreground font-semibold">AI &amp; Data Science graduate</span> (May 2026, <span className="text-foreground font-semibold">CGPA: 7.85 / 10</span>) with hands-on experience shipping production software to paying clients, engineering multi-modal agent workflows, and publishing academic research in cognitive AI systems.
               </p>
 
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-                My work spans the full engineering lifecycle: from fine-tuning generative diffusion pipelines (SDXL, ControlNet) and building hybrid RAG systems, to delivering fault-tolerant GST billing engines with automated WhatsApp delivery, thermal receipt printing, and integer paise reconciliation.
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                My core expertise spans <span className="text-foreground font-semibold">Generative AI, LangChain/LangGraph, RAG pipelines</span>, and high-performance backend &amp; full-stack architectures (<span className="text-foreground font-semibold">FastAPI, Fastify, React 18, PostgreSQL</span>).
               </p>
             </div>
 
             {/* Resume Action Bar inside Bio */}
-            <div className="relative z-10 flex flex-wrap gap-3 pt-4 border-t border-border/60">
+            <div className="flex flex-wrap gap-3 pt-4 border-t border-border/60">
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
@@ -127,132 +127,71 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Card 2: Academic Credentials */}
-          <motion.div
-            variants={fadeInUp}
-            className="p-6 sm:p-7 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md card-glow flex flex-col justify-between hover:border-primary/40 transition-all"
-          >
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center text-primary mb-4">
-                <GraduationCap size={24} />
-              </div>
-
-              <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md bg-primary/15 text-primary border border-primary/25 inline-block mb-2">
-                B.Tech Graduate · May 2026
-              </span>
-
-              <h4 className="text-lg font-bold text-foreground mb-1">
-                AI &amp; Data Science
-              </h4>
-              <p className="text-xs text-muted-foreground font-medium mb-3">
-                Dhirajlal Gandhi College of Technology, Salem
-              </p>
-
-              <div className="p-3 rounded-xl bg-secondary/80 border border-border/60 mb-3">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-muted-foreground">Cumulative GPA</span>
-                  <span className="font-extrabold text-foreground text-sm">7.85 / 10.0</span>
-                </div>
-              </div>
-
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Specialized in Deep Learning, Multi-Agent Architectures, Computer Vision, and Cloud Machine Learning.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Card 3: Research Publication Spotlight */}
-          <motion.div
-            variants={fadeInUp}
-            className="p-6 sm:p-7 rounded-3xl border border-primary/30 bg-card/60 backdrop-blur-md card-glow flex flex-col justify-between hover:border-primary/50 transition-all"
-          >
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center text-primary mb-4">
-                <Award size={24} />
-              </div>
-
-              <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md bg-primary/20 text-primary border border-primary/30 inline-block mb-2">
-                1st Author Published Research
-              </span>
-
-              <h4 className="text-base font-bold text-foreground leading-snug mb-2">
-                AUREXIS AI: Real-Time Financial Analysis &amp; Decision Support
-              </h4>
-
-              <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                Published in the <span className="text-foreground font-semibold">International Journal of Innovative Research in Technology (IJIRT)</span>, Vol. 12, Issue 12 (pp. 3521-3529), May 2026.
-              </p>
-            </div>
-
-            <Button
-              size="sm"
-              variant="outline"
-              className="w-full border-primary/30 hover:bg-primary/10 text-primary font-bold text-xs gap-1.5 rounded-xl"
-              asChild
+          {/* Right Column: Credentials & Publication (Spans 5 cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-5 justify-between">
+            {/* Academic Credentials Card */}
+            <motion.div
+              variants={fadeInUp}
+              className="p-6 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md card-glow flex-1 flex flex-col justify-between hover:border-primary/40 transition-all"
             >
-              <a
-                href="https://ijirt.org/article?manuscript=200876"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>Read Published Paper</span>
-                <ExternalLink size={13} />
-              </a>
-            </Button>
-          </motion.div>
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md bg-primary/15 text-primary border border-primary/25">
+                    B.Tech · May 2026 Grad
+                  </span>
+                  <span className="text-xs font-extrabold text-foreground bg-secondary/80 px-2.5 py-0.5 rounded-md border border-border/60">
+                    7.85 / 10.0 CGPA
+                  </span>
+                </div>
 
-          {/* Card 4: Core Engineering Pillars (Spans 2 columns) */}
-          <motion.div
-            variants={fadeInUp}
-            className="md:col-span-2 p-6 sm:p-7 rounded-3xl border border-border/80 bg-card/60 backdrop-blur-md card-glow flex flex-col justify-between hover:border-primary/40 transition-all"
-          >
-            <div>
-              <div className="flex items-center gap-2.5 mb-3">
-                <Sparkles className="text-primary" size={18} />
-                <h4 className="text-base font-bold text-foreground">
-                  Core Engineering Competencies &amp; Focus Areas
+                <h4 className="text-base font-bold text-foreground mb-1">
+                  AI &amp; Data Science
                 </h4>
+                <p className="text-xs text-muted-foreground">
+                  Dhirajlal Gandhi College of Technology, Salem
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Research Publication Card */}
+            <motion.div
+              variants={fadeInUp}
+              className="p-6 rounded-3xl border border-primary/30 bg-card/60 backdrop-blur-md card-glow flex-1 flex flex-col justify-between hover:border-primary/50 transition-all"
+            >
+              <div>
+                <div className="flex items-center gap-1.5 text-primary mb-2">
+                  <Award size={16} />
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-md bg-primary/20 text-primary border border-primary/30">
+                    1st Author Published Research
+                  </span>
+                </div>
+
+                <h4 className="text-sm font-bold text-foreground leading-snug mb-1.5">
+                  AUREXIS AI: Real-Time Financial Decision Support
+                </h4>
+
+                <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                  Published in the <span className="text-foreground font-semibold">IJIRT</span>, Vol. 12 Issue 12 (pp. 3521-3529), May 2026.
+                </p>
               </div>
 
-              <p className="text-xs text-muted-foreground mb-4">
-                Key architectural capabilities developed across real-world client systems and research pipelines:
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="p-3 rounded-2xl bg-secondary/60 border border-border/60 flex items-start gap-3">
-                  <Cpu className="text-primary mt-0.5 flex-shrink-0" size={18} />
-                  <div>
-                    <p className="text-xs font-bold text-foreground">Generative AI &amp; Agent Workflows</p>
-                    <p className="text-[11px] text-muted-foreground">LangChain, LangGraph, CrewAI, SDXL, ComfyUI, Ollama local inference.</p>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-secondary/60 border border-border/60 flex items-start gap-3">
-                  <Building2 className="text-primary mt-0.5 flex-shrink-0" size={18} />
-                  <div>
-                    <p className="text-xs font-bold text-foreground">Production Client Systems</p>
-                    <p className="text-[11px] text-muted-foreground">GST billing engines, thermal printing, WhatsApp automation, zero-loss migrations.</p>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-secondary/60 border border-border/60 flex items-start gap-3">
-                  <Layers className="text-primary mt-0.5 flex-shrink-0" size={18} />
-                  <div>
-                    <p className="text-xs font-bold text-foreground">High-Throughput Backend APIs</p>
-                    <p className="text-[11px] text-muted-foreground">FastAPI, Fastify, PostgreSQL, Prisma, S3 artifact registries, Hypothesis testing.</p>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-2xl bg-secondary/60 border border-border/60 flex items-start gap-3">
-                  <Code2 className="text-primary mt-0.5 flex-shrink-0" size={18} />
-                  <div>
-                    <p className="text-xs font-bold text-foreground">Computer Vision &amp; Deep Learning</p>
-                    <p className="text-[11px] text-muted-foreground">PyTorch U-Net, OpenCV, MediaPipe landmarks, YOLOv8 surveillance engines.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+              <Button
+                size="sm"
+                variant="outline"
+                className="w-full border-primary/30 hover:bg-primary/10 text-primary font-bold text-xs gap-1.5 rounded-xl"
+                asChild
+              >
+                <a
+                  href="https://ijirt.org/article?manuscript=200876"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Read Paper</span>
+                  <ExternalLink size={13} />
+                </a>
+              </Button>
+            </motion.div>
+          </div>
 
         </motion.div>
       </div>
